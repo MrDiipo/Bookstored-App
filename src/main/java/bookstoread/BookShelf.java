@@ -6,10 +6,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class BookShelf {
-
+    // Field declarations
     private final List<String> books = new ArrayList<>();
+    // Method Declarations
     public List<String> books() {
-        return books;
+        return Collections.unmodifiableList(books);
     }
     public void add(String... bookToAdd){
         books.addAll(Arrays.asList(bookToAdd));
