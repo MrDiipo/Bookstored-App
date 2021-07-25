@@ -1,9 +1,7 @@
 package bookstoread;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class BookShelf {
     // Field declarations
@@ -14,5 +12,9 @@ public class BookShelf {
     }
     public void add(String... bookToAdd){
         books.addAll(Arrays.asList(bookToAdd));
+    }
+
+    public List<String> arrange() {
+       return books.stream().sorted().collect(Collectors.toList());
     }
 }
