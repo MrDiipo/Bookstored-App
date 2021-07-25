@@ -5,16 +5,16 @@ import java.util.stream.Collectors;
 
 public class BookShelf {
     // Field declarations
-    private final List<String> books = new ArrayList<>();
+    private final List<Book> books = new ArrayList<>();
     // Method Declarations
-    public List<String> books() {
+    public List<Book> books() {
         return Collections.unmodifiableList(books);
     }
-    public void add(String... bookToAdd){
-        books.addAll(Arrays.asList(bookToAdd));
+    public void add(Book... bookToAdd){
+        Arrays.stream(bookToAdd).forEach(books::add);
     }
 
-    public List<String> arrange() {
-       return books.stream().sorted().collect(Collectors.toList());
+    public List<Book> arrange() {
+       return  books.stream().sorted().collect(Collectors.toList());
     }
 }

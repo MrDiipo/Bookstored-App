@@ -28,17 +28,17 @@ public class BookShelfSpec {
         DesignPatterns = new Book("Design Patterns in Java", "Dipo Elegbede", LocalDate.of(1998, Month.APRIL, 2));
     }
     @Test
-    public void shelfEmptyWhenNoBookAdded() throws Exception{
-        List<String> books = shelf.books();
+    public void shelfEmptyWhenNoBookAdded() throws Exception {
+        List<Book> books = shelf.books();
         assertTrue(books.isEmpty(), () -> "BookShelf should be empty");
     }
 
     @Test
     public void bookshelfContainsTwoBooksWhenTwoBooksAdded() {
-        shelf.add("Effective Java", "Code Complete");
-        List<String> books2 = shelf.books();
+        shelf.add(effectiveJava, codeComplete);
+        List<Book> books2 = shelf.books();
         try {
-            books2.add("Spring framework reference.");
+            books2.add(effectiveJava);
             fail(()-> "Should not be able to add book to books");
         }catch (Exception e){
             assertTrue( e instanceof UnsupportedOperationException,()-> "Should throw UnsupportedOperationException.");
@@ -49,17 +49,16 @@ public class BookShelfSpec {
     @Test
     public void emptyBookShelfWhenAddIsCalledWithoutBooks(){
         shelf.add();
-        List<String> books = shelf.books();
+        List<Book> books = shelf.books();
         assertTrue(books.isEmpty(), () -> "Please, the books ought to be empty");
     }
 
     @Test
-    public void booShelfArrangedByTitle(){
-        shelf.add("Effective Java","Code Complete", "Design Patterns in Java");
-        shelf.arrange();
-        List<String> arrangedBookShelf = shelf.books();
-        assertEquals(Arrays.asList("Effective Java","Code Complete", "Design Patterns in Java"), arrangedBookShelf,
-                ()-> "The books should be arranged this way");
+    void bookShelfArrangedByBookTitle(){
+        shelf.add(effectiveJava, DesignPatterns);
+        List<Book> book = shelf.arrange();
+        assertEquals(Arrays.asList(DesignPatterns, effectiveJava), book, ()-> "Should be arranged this way");
     }
+
 }
 
