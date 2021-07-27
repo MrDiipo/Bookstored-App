@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -69,9 +70,19 @@ public class BookShelfSpec {
         } catch (UnsupportedOperationException e){
             e.printStackTrace();
         }
-
-
     }
-
-}
+    @Test
+    public void bookInBookShelfAreInInsertionOrderAfterArrange(){
+            shelf.add(effectiveJava, DesignPatterns);
+            shelf.arrange();
+            List<Book> books = shelf.books();
+            assertEquals(Arrays.asList(effectiveJava, DesignPatterns), books, ()-> "Books in shelf are in insertion order");
+        }
+        @Test
+    public void bookShelfArrangedByUserProvidedCriteria(){
+        shelf.add(effectiveJava, codeComplete, DesignPatterns);
+        List<Book> books = shelf.arrange(Comparator.<Book>naturalOrder().reversed());
+        assertEquals(Arrays.asList(effectiveJava, DesignPatterns, codeComplete), books, ()-> "Books in a bookshelf are arranged in descending order of book title");
+        }
+    }
 
