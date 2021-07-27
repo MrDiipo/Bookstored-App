@@ -59,6 +59,19 @@ public class BookShelfSpec {
         List<Book> book = shelf.arrange();
         assertEquals(Arrays.asList(DesignPatterns, effectiveJava), book, ()-> "Should be arranged this way");
     }
+    @Test
+    public void booksReturnedFromBookshelfIsImmutableForClient(){
+        shelf.add(effectiveJava, codeComplete);
+        List<Book> books = shelf.books();
+        try {
+            books.add(DesignPatterns);
+            fail(() -> "Addition disallowed");
+        } catch (UnsupportedOperationException e){
+            e.printStackTrace();
+        }
+
+
+    }
 
 }
 
